@@ -1,18 +1,21 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { User, UserSchema } from '../schemas/user.schema';
+import { ChatController } from './chat.controller';
+import { ChatService } from './chat.service';
 import { Conversation, ConversationSchema } from '../schemas/conversation.schema';
 import { Chat, ChatSchema } from '../schemas/chat.schema';
+import { User, UserSchema } from '../schemas/user.schema';
 
 @Module({
   imports: [
-    MongooseModule.forRoot(process.env.MONGODB_URI || 'mongodb://localhost/chat-app'),
     MongooseModule.forFeature([
-      { name: User.name, schema: UserSchema },
       { name: Conversation.name, schema: ConversationSchema },
       { name: Chat.name, schema: ChatSchema },
+      { name: User.name, schema: UserSchema },
     ]),
   ],
-  exports: [MongooseModule],
+  controllers: [ChatController],
+  providers: [ChatService],
+  exports: [ChatService],
 })
-export class DatabaseModule {}
+export class ChatModule {}
