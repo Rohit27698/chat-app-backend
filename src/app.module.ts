@@ -13,7 +13,7 @@ import { ChatController } from './chat/chat.controller';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: ['.env', '.env.production'],
+      envFilePath:  '.env.production',
       ignoreEnvFile: process.env.NODE_ENV === 'production',
     }),
     DatabaseModule,
